@@ -488,16 +488,10 @@ def _make_bundle_core():
             candidates = os.listdir(
                 pth.data_path([bundle_name], environ=environ),
             )
-            return pth.data_path(
-                [
-                    bundle_name,
-                    max(
+            return max(
                         filter(complement(pth.hidden), candidates),
                         key=from_bundle_ingest_dirname,
-                    ),
-                ],
-                environ=environ,
-            )
+                    )
         except (ValueError, OSError) as e:
             if getattr(e, "errno", errno.ENOENT) != errno.ENOENT:
                 raise
